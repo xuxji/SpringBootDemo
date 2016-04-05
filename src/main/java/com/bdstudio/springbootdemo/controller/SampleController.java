@@ -16,6 +16,11 @@ public class SampleController {
 	@ResponseBody
 	public String home() {
 		logger.debug("Start the Application");
+		logger.info("Start the Application");
+		
+		for(int i=1; i<1000; i++) {
+			logger.info("print to :" + i);
+		}
 		return "Hello World";
 	}
 

@@ -1,27 +1,31 @@
 package com.bdstudio.springbootdemo.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bdstudio.springbootdemo.domain.City;
 import com.bdstudio.springbootdemo.service.CityService;
 
 @RestController
-@RequestMapping(value="/city")
+@RequestMapping(value = "/city")
 public class CityController {
-	
+	private static final Logger logger = LoggerFactory.getLogger("CityController");
 	
 	@Autowired
 	private CityService service;
 	
-	@RequestMapping(value = "/", method=RequestMethod.GET)
-	public City getCity(@RequestParam(value="id", defaultValue="1") long id) {
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public City getCity(@PathVariable long id) {
 		
 		City city = service.selectCityById(id);
-		
+		logger.info(city.toString());
 		return city;
 	}
 

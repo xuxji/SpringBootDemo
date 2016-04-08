@@ -1,8 +1,20 @@
 package com.bdstudio.springbootdemo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bdstudio.springbootdemo.dao.CityRepository;
 import com.bdstudio.springbootdemo.domain.City;
 
-public interface CityService {
+@Service
+public class CityService{
 	
-	public City selectCityById(long id);
+	@Autowired
+	private CityRepository mapper;
+	
+	public City selectCityById(long id){
+		
+		return mapper.selectCityById(id);
+	}
+	
 }
